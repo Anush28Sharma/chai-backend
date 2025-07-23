@@ -44,10 +44,8 @@ const userSchema = new mongoose.Schema(
             type :String,
             required: [true, "Password is required"],
         },
-        refresToken:{
-             type :String,
-          
-        }
+       refreshToken: { type: String }
+
 
     },
 {timestamps:true})
@@ -73,7 +71,7 @@ userSchema.methods.generateAccessToken =  function(){
             _id:this._id,
             email: this.email,
             username: this.username,
-            fullName: this.fullname
+            fullName: this.fullName
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
@@ -87,9 +85,9 @@ userSchema.methods.generateRefreshToken =  function(){
         {
             _id:this._id,
         },
-        process.env.REFERESH_TOKEN_SECRET,
+        process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.REFERESH_TOKEN_EXPIRY
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 };
